@@ -24,11 +24,11 @@ import inkex
 class MultiScaleEffect(inkex.Effect):
     def __init__(self):
         inkex.Effect.__init__(self)
-        self.OptionParser.add_option('-s', '--start-scale', action='store',
-                                     type='float', dest='start-scale',
+        self.OptionParser.add_option('-s', '--startscale', action='store',
+                                     type='float', dest='startscale',
                                      default=1.0, help='Starting scale')
-        self.OptionParser.add_option('-f', '--finish-scale', action='store',
-                                     type='float', dest='finish-scale',
+        self.OptionParser.add_option('-f', '--finishscale', action='store',
+                                     type='float', dest='finishscale',
                                      default=1.0, help='Finishing scale')
 
     def effect(self):
