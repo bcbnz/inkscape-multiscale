@@ -1,4 +1,15 @@
 <inkscape-extension>
 	<_name>Multiscale</_name>
 	<id>org.blairb.ext.multiscale</id>
+	<dependency type="executable" location="extensions">inkex.py</dependency>
+	<dependency type="executable" location="extensions">multiscale.py</dependency>
+	<effect>
+		<object-type>all</object-type>
+		<effects-menu>
+			<submenu _name="Modify Path" />
+		</effects-menu>
+	</effect>
+	<script>
+		<command reldir="extensions" interpreter="python">multiscale.py</command>
+	</script>
 </inkscape-extension>
