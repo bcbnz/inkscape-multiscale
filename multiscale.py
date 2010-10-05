@@ -18,3 +18,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import gettext
 _ = gettext.gettext
+
+import inkex
+
+class MultiScaleEffect(inkex.Effect):
+    def __init__(self):
+        inkex.Effect.__init__(self)
+        self.OptionParser.add_option('-s', '--start-scale', action='store',
+                                     type='float', dest='start-scale',
+                                     default=1.0, help='Starting scale')
+        self.OptionParser.add_option('-f', '--finish-scale', action='store',
+                                     type='float', dest='finish-scale',
+                                     default=1.0, help='Finishing scale')
+
+    def effect(self):
+        pass
+
+if __name__ == '__main__':
+    e = MultiScaleEffect()
+    e.affect()
