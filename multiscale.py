@@ -20,6 +20,7 @@ import gettext
 _ = gettext.gettext
 
 import inkex
+import simpletransform
 
 class MultiScaleEffect(inkex.Effect):
     def __init__(self):
@@ -32,7 +33,20 @@ class MultiScaleEffect(inkex.Effect):
                                      default=1.0, help='Finishing scale')
 
     def effect(self):
-        pass
+        # Check we have enough objects selected
+        count = len(self.selected)
+        if count < 2:
+            inkex.errormsg(_("Please select at least two objects."))
+
+        # The step in scale between each object
+        step = (self.options.startscale - self.options.finishscale)/(count - 1)
+
+        # Apply transform to each node
+        scale = self.options.startscale
+        for id, node in self.selected.iteritems():
+            transform = simpletransform.parseTransform('scale(%f)' % scale)
+            simpletransform.applyTransformToNode(transform, node)
+            scale += step
 
 if __name__ == '__main__':
     e = MultiScaleEffect()
