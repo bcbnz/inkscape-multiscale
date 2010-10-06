@@ -5,8 +5,12 @@
 	<dependency type="executable" location="extensions">pathmodifier.py</dependency>
 	<dependency type="executable" location="extensions">simpletransform.py</dependency>
 	<dependency type="executable" location="extensions">multiscale.py</dependency>
-	<param name="startscale" type="float" min="-10000" _gui-text="Starting scale">1</param>
-	<param name="finishscale" type="float" min="-10000" _gui-text="Finishing scale">1</param>
+	<_param name="xoptions" type="description">Width scaling</_param>
+	<param name="xstart" type="float" min="-10000" _gui-text="Starting scale">1</param>
+	<param name="xfinish" type="float" min="-10000" _gui-text="Finishing scale">1</param>
+	<_param name="yoptions" type="description">Height scaling</_param>
+	<param name="ystart" type="float" min="-10000" _gui-text="Starting scale">1</param>
+	<param name="yfinish" type="float" min="-10000" _gui-text="Finishing scale">1</param>
 	<effect>
 		<object-type>all</object-type>
 		<effects-menu>

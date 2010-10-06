@@ -21,15 +21,22 @@ _ = gettext.gettext
 
 import inkex
 import pathmodifier
+import simpletransform
 
 class MultiScaleEffect(inkex.Effect):
     def __init__(self):
         inkex.Effect.__init__(self)
-        self.OptionParser.add_option('-s', '--startscale', action='store',
-                                     type='float', dest='startscale',
+        self.OptionParser.add_option('-s', '--xstart', action='store',
+                                     type='float', dest='xstart',
                                      default=1.0, help='Starting scale')
-        self.OptionParser.add_option('-f', '--finishscale', action='store',
-                                     type='float', dest='finishscale',
+        self.OptionParser.add_option('-f', '--xfinish', action='store',
+                                     type='float', dest='xfinish',
+                                     default=1.0, help='Finishing scale')
+        self.OptionParser.add_option('-x', '--ystart', action='store',
+                                     type='float', dest='ystart',
+                                     default=1.0, help='Starting scale')
+        self.OptionParser.add_option('-z', '--yfinish', action='store',
+                                     type='float', dest='yfinish',
                                      default=1.0, help='Finishing scale')
 
     def effect(self):
@@ -39,17 +46,21 @@ class MultiScaleEffect(inkex.Effect):
             inkex.errormsg(_("Please select at least two objects."))
 
         # The step in scale between each object
-        step = (self.options.finishscale - self.options.startscale)/(count - 1)
+        xstep = (self.options.xfinish - self.options.xstart)/(count - 1)
+        ystep = (self.options.yfinish - self.options.ystart)/(count - 1)
 
         # Sort by z order, lowest first
         id_list = self.selected.keys()
         id_list = pathmodifier.zSort(self.document.getroot(), id_list)
 
         # Scale each object
-        scale = self.options.startscale
+        xscale = self.options.xstart
+        yscale = self.options.ystart
         for id in id_list:
             # No scaling actually happening
-            if scale == 1.0:
+            if xscale == 1.0 and yscale == 1.0:
+                xscale += xstep
+                yscale += ystep
                 continue
 
             # Get node and current transformations
@@ -58,13 +69,14 @@ class MultiScaleEffect(inkex.Effect):
 
             # Scale the object as desired
             if transform:
-                transform += ' scale(%f)' % scale
+                transform += ' scale(%f, %f)' % (xscale, yscale)
             else:
-                transform = 'scale(%f)' % scale
+                transform = 'scale(%f, %f)' % (xscale, yscale)
             node.set('transform', transform)
 
             # Change the scale ready for the next object
-            scale += step
+            xscale += xstep
+            yscale += ystep
 
 if __name__ == '__main__':
     e = MultiScaleEffect()
