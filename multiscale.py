@@ -80,9 +80,15 @@ class MultiScaleEffect(inkex.Effect):
 
             # Scale the object as desired
             if transform:
-                transform += ' scale(%f, %f)' % (xscale, yscale)
+                if xscale == yscale:
+                    transform += ' scale(%f)' % (xscale)
+                else:
+                    transform += ' scale(%f, %f)' % (xscale, yscale)
             else:
-                transform = 'scale(%f, %f)' % (xscale, yscale)
+                if xscale == yscale:
+                    transform = 'scale(%f)' % (xscale)
+                else:
+                    transform = 'scale(%f, %f)' % (xscale, yscale)
             node.set('transform', transform)
 
             # Change the scale ready for the next object
