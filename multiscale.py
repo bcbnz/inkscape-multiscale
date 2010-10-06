@@ -20,7 +20,7 @@ import gettext
 _ = gettext.gettext
 
 import inkex
-import simpletransform
+import pathmodifier
 
 class MultiScaleEffect(inkex.Effect):
     def __init__(self):
@@ -39,13 +39,27 @@ class MultiScaleEffect(inkex.Effect):
             inkex.errormsg(_("Please select at least two objects."))
 
         # The step in scale between each object
-        step = (self.options.startscale - self.options.finishscale)/(count - 1)
+        step = (self.options.finishscale - self.options.startscale)/(count - 1)
 
-        # Apply transform to each node
+        # Sort by z order, lowest first
+        id_list = self.selected.keys()
+        id_list = pathmodifier.zSort(self.document.getroot(), id_list)
+
+        # Scale each object
         scale = self.options.startscale
-        for id, node in self.selected.iteritems():
-            transform = simpletransform.parseTransform('scale(%f)' % scale)
-            simpletransform.applyTransformToNode(transform, node)
+        for id in id_list:
+            # Get node and current transformations
+            node = self.selected[id]
+            transform = node.get('transform')
+
+            # Scale the object as desired
+            if transform:
+                transform += ' scale(%f)' % scale
+            else:
+                transform = 'scale(%f)' % scale
+            node.set('transform', transform)
+
+            # Change the scale ready for the next object
             scale += step
 
 if __name__ == '__main__':
