@@ -1,4 +1,5 @@
-<inkscape-extension>
+<?xml version="1.0" encoding="UTF-8"?>
+<inkscape-extension xmlns="http://www.inkscape.org/namespace/inkscape/extension">
 	<_name>Multiscale</_name>
 	<id>org.blairb.ext.multiscale</id>
 	<dependency type="executable" location="extensions">inkex.py</dependency>
