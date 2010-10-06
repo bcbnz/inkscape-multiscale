@@ -26,18 +26,21 @@ import simpletransform
 class MultiScaleEffect(inkex.Effect):
     def __init__(self):
         inkex.Effect.__init__(self)
-        self.OptionParser.add_option('-s', '--xstart', action='store',
+        self.OptionParser.add_option('-x', '--xstart', action='store',
                                      type='float', dest='xstart',
-                                     default=1.0, help='Starting scale')
+                                     default=1.0, help='Starting scale for width')
         self.OptionParser.add_option('-f', '--xfinish', action='store',
                                      type='float', dest='xfinish',
-                                     default=1.0, help='Finishing scale')
-        self.OptionParser.add_option('-x', '--ystart', action='store',
+                                     default=1.0, help='Finishing scale for width')
+        self.OptionParser.add_option('-s', '--ysame', action='store',
+                                     type='inkbool', dest='ysame',
+                                     default=False, help='Use same scaling for height as width')
+        self.OptionParser.add_option('-y', '--ystart', action='store',
                                      type='float', dest='ystart',
-                                     default=1.0, help='Starting scale')
-        self.OptionParser.add_option('-z', '--yfinish', action='store',
+                                     default=1.0, help='Starting scale for height')
+        self.OptionParser.add_option('-g', '--yfinish', action='store',
                                      type='float', dest='yfinish',
-                                     default=1.0, help='Finishing scale')
+                                     default=1.0, help='Finishing scale for height')
 
     def effect(self):
         # Check we have enough objects selected
@@ -47,15 +50,23 @@ class MultiScaleEffect(inkex.Effect):
 
         # The step in scale between each object
         xstep = (self.options.xfinish - self.options.xstart)/(count - 1)
-        ystep = (self.options.yfinish - self.options.ystart)/(count - 1)
+        if self.options.ysame:
+            ystep = xstep
+        else:
+            ystep = (self.options.yfinish - self.options.ystart)/(count - 1)
 
-        # Sort by z order, lowest first
+        # Starting scales
+        xscale = self.options.xstart
+        if self.options.ysame:
+            yscale = xscale
+        else:
+            yscale = self.options.ystart
+
+        # Sort selected objects by z order, lowest first
         id_list = self.selected.keys()
         id_list = pathmodifier.zSort(self.document.getroot(), id_list)
 
         # Scale each object
-        xscale = self.options.xstart
-        yscale = self.options.ystart
         for id in id_list:
             # No scaling actually happening
             if xscale == 1.0 and yscale == 1.0:
