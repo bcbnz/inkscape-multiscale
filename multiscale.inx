@@ -9,10 +9,26 @@
 	<_param name="xoptions" type="description">Width scaling</_param>
 	<param name="xstart" type="float" min="-10000" _gui-text="Starting scale:">1</param>
 	<param name="xfinish" type="float" min="-10000" _gui-text="Finishing scale:">1</param>
+	<param name="xpos" type="enum" _gui-text="Position:">
+		<_item value="scaled">Scaled position</_item>
+		<_item value="left">Anchor leftmost point</_item>
+		<_item valie="centre">Anchor centre of bounding box</_item>
+		<_item value="right">Anchor rightmost point</_item>
+		<_item value="arithmetic">Anchor arithmetic mean of points</_item>
+		<_item value="geometric">Anchor geometric mean of points</_item>
+	</param>
 	<_param name="yoptions" type="description">Height scaling</_param>
 	<param name="ysame" type="boolean" _gui-text="Use same scaling as width?">False</param>
 	<param name="ystart" type="float" min="-10000" _gui-text="Starting scale:">1</param>
 	<param name="yfinish" type="float" min="-10000" _gui-text="Finishing scale:">1</param>
+	<param name="ypos" type="enum" _gui-text="Position:">
+		<_item value="scaled">Scaled position</_item>
+		<_item value="top">Anchor topmost point</_item>
+		<_item valie="middle">Anchor middle of bounding box</_item>
+		<_item value="bottom">Anchor lowest point</_item>
+		<_item value="arithmetic">Anchor arithmetic mean of points</_item>
+		<_item value="geometric">Anchor geometric mean of points</_item>
+	</param>
 	<effect>
 		<object-type>all</object-type>
 		<effects-menu>

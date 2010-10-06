@@ -32,6 +32,9 @@ class MultiScaleEffect(inkex.Effect):
         self.OptionParser.add_option('-f', '--xfinish', action='store',
                                      type='float', dest='xfinish',
                                      default=1.0, help='Finishing scale for width')
+        self.OptionParser.add_option('-p', '--xpos', action='store',
+                                     type='string', dest='xpos',
+                                     default='scaled', help='X position of scaled objects')
         self.OptionParser.add_option('-s', '--ysame', action='store',
                                      type='inkbool', dest='ysame',
                                      default=False, help='Use same scaling for height as width')
@@ -41,6 +44,9 @@ class MultiScaleEffect(inkex.Effect):
         self.OptionParser.add_option('-g', '--yfinish', action='store',
                                      type='float', dest='yfinish',
                                      default=1.0, help='Finishing scale for height')
+        self.OptionParser.add_option('-q', '--ypos', action='store',
+                                     type='string', dest='ypos',
+                                     default='scaled', help='Y position of scaled objects')
 
     def effect(self):
         # Check we have enough objects selected
