@@ -3,8 +3,8 @@
 	<id>org.blairb.ext.multiscale</id>
 	<dependency type="executable" location="extensions">inkex.py</dependency>
 	<dependency type="executable" location="extensions">multiscale.py</dependency>
-	<param name="startscale" type="float" min="0" _gui-text="Starting scale">1</param>
-	<param name="finishscale" type="float" min="0" _gui-text="Finishing scale">1</param>
+	<param name="startscale" type="float" min="-10000" _gui-text="Starting scale">1</param>
+	<param name="finishscale" type="float" min="-10000" _gui-text="Finishing scale">1</param>
 	<effect>
 		<object-type>all</object-type>
 		<effects-menu>
