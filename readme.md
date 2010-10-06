@@ -1,5 +1,5 @@
-inkscape-multiscale
-===================
+inkscape-multiscale 0.5
+=======================
 
 An Inkscape extension to allow multiple objects to be resized with
 increasing or decreasing scale factors.
