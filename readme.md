@@ -33,9 +33,20 @@ Usage
    is 3 and the finishing is 0.5, and you select 6 objects, the scales
    applied will be 3, 2.5, 2, 1.5, 1 and 0.5.
 
-   To adjust the height (and therefore the order in which the scales
-   are applied) of the objects, use the 'Raise', 'Lower', 'Raise to top',
-   or 'Lower to bottom' commands in the 'Object' menu.
+To adjust the height (and therefore the order in which the scales are
+applied) of the objects, use the 'Raise', 'Lower', 'Raise to top', or
+'Lower to bottom' commands in the 'Object' menu.
+
+Issues
+------
+
+SVG scaling works by multiplying the position of each node by the scaling
+factor. For example, if you have a line between (100, 100) and (200, 100)
+and you scale it by a factor of 1.5, the ends become (150, 150) and
+(300, 150). Thus the result appears to be translated as well as scaled.
+Future versions of this extension will provide the ability to anchor
+either the centre or one edge of each object to remove this apparent
+translation.
 
 License
 -------
