@@ -48,6 +48,10 @@ class MultiScaleEffect(inkex.Effect):
         # Scale each object
         scale = self.options.startscale
         for id in id_list:
+            # No scaling actually happening
+            if scale == 1.0:
+                continue
+
             # Get node and current transformations
             node = self.selected[id]
             transform = node.get('transform')
